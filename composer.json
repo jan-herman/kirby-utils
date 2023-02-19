@@ -1,0 +1,24 @@
+{
+    "name": "jan-herman/kirby-utils",
+    "description": "Collection of utilities for Kirby CMS.",
+    "version": "1.0.0",
+    "type": "kirby-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jan Herman",
+            "email": "mail@janherman.com",
+            "homepage": "https://janherman.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "getkirby/composer-installer": "^1.2"
+    },
+    "extra": {
+		"installer-name": "utils"
+	},
+    "config": {
+        "optimize-autoloader": true
+    }
+}
