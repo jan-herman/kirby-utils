@@ -3,6 +3,11 @@
 use Kirby\Cms\App as Kirby;
 
 Kirby::plugin('jan-herman/utils', [
+    'fieldMethods' => [
+        'unhtml' => function ($field) {
+            return Str::unhtml($field->toString());
+        }
+    ],
     'fileMethods' => [
         'thumbWebp' => function (array|string|null $options): \Kirby\Cms\FileVersion|\Kirby\Cms\File
         {
