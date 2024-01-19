@@ -1,7 +1,7 @@
 {
     "name": "jan-herman/kirby-utils",
     "description": "Collection of utilities for Kirby CMS.",
-    "version": "1.1.0",
+    "version": "2.0.0",
     "type": "kirby-plugin",
     "license": "MIT",
     "homepage": "https://github.com/jan-herman/kirby-utils",
@@ -17,9 +17,14 @@
         "getkirby/composer-installer": "^1.2"
     },
     "extra": {
-		"installer-name": "utils"
-	},
+        "installer-name": "utils"
+    },
     "config": {
         "optimize-autoloader": true
+    },
+    "autoload": {
+        "psr-4": {
+            "JanHerman\\Utils\\": "lib/"
+        }
     }
 }
