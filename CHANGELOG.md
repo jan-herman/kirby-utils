@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.1.0] - 2024-02-20
+### Added
+- `JanHerman\Utils\Embed` class
+
+
 ## [2.0.0] - 2024-01-19
 ### Added
 - `JanHerman\Utils\Url` class
