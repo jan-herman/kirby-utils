@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.2.0] - 2024-05-28
+### Added
+- `JanHerman\Utils\Translation` class
+
+
 ## [2.1.0] - 2024-02-20
 ### Added
 - `JanHerman\Utils\Embed` class

@@ -1,7 +1,7 @@
 {
     "name": "jan-herman/kirby-utils",
     "description": "Collection of utilities for Kirby CMS.",
-    "version": "2.1.0",
+    "version": "2.2.0",
     "type": "kirby-plugin",
     "license": "MIT",
     "homepage": "https://github.com/jan-herman/kirby-utils",
