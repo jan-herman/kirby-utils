@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.3.0] - 2024-06-04
+### Added
+- Autoload translations from site/languages/translations directory
+
+
 ## [2.2.0] - 2024-05-28
 ### Added
 - `JanHerman\Utils\Translation` class
