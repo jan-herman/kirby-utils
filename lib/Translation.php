@@ -3,11 +3,43 @@
 namespace JanHerman\Utils;
 
 use Kirby\Data\Yaml;
-use Kirby\Filesystem\F;
 use Kirby\Exception\Exception;
+use Kirby\Filesystem\Dir;
+use Kirby\Filesystem\F;
+use Kirby\Toolkit\Str;
 
 class Translation
 {
+    /**
+     * Loads translation files from a directory and combines them by language.
+     *
+     * @param string $dir The directory containing the translation files.
+     * @return array An associative array where keys are language codes and values are translations.
+     */
+    public static function loadDir(string $dir): array
+    {
+        $translations = [];
+        $files = Dir::index($dir, true, null, $dir);
+
+        foreach ($files as $path) {
+            if (F::exists($path) === false) {
+                continue;
+            }
+
+            $filename = F::name($path);
+            $lang = str_contains($filename, '.') ? Str::after($filename, '.') : $filename;
+            $file_translations = Translation::load($path);
+
+            if (isset($translations[$lang])) {
+                $translations[$lang] = array_merge($translations[$lang], $file_translations);
+            } else {
+                $translations[$lang] = $file_translations;
+            }
+        }
+
+        return $translations;
+    }
+
     /**
      * Loads a YAML file and returns a flattened array of translations.
      *

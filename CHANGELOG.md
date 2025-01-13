@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.5.0] - 2025-01-13
+### Added
+- `Translation::loadDir` method
+
+### Changed
+- autoloading translations
+    - support for naming translation files with a prefix (i.e. some-file.en.yaml)
+    - support for multiple translation files in the same language (i.e. en.yaml and some-file.en.yaml, translations will be merged)
+    - support for translation files in subdirectories
+
+
 ## [2.4.0] - 2024-10-07
 ### Added
 - `JanHerman\Utils\Menu` class
