@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.6.0] - 2025-06-09
+### Added
+- `v()` helper function (adds a `?v=XXX` parameter to the URL for cache busting)
+
+
 ## [2.5.0] - 2025-01-13
 ### Added
 - `Translation::loadDir` method

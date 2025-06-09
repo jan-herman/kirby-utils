@@ -20,3 +20,19 @@ Kirby::plugin('jan-herman/utils', [
      */
     'translations' => Translation::loadDir(kirby()->root('languages') . '/translations'),
 ]);
+
+
+// Helper functions
+if (!function_exists('v')) {
+    function v(string $url): string
+    {
+        $relative_url = parse_url($url, PHP_URL_PATH);
+        $asset = asset($relative_url);
+
+        if ($asset->exists()) {
+            return $url . '?v=' . filemtime($asset->root());
+        }
+
+        return $url;
+    }
+}
