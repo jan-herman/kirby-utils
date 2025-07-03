@@ -6,13 +6,28 @@ use Kirby\Toolkit\Str;
 
 class Embed
 {
-    public static function videoId(string $url): string|null
+    public static function type(string $url): string
     {
         if (Str::contains($url, 'youtu', true) === true) {
-            return static::youtubeId($url);
+            return 'youtube';
         }
 
         if (Str::contains($url, 'vimeo', true) === true) {
+            return 'vimeo';
+        }
+
+        return 'unknown';
+    }
+
+    public static function videoId(string $url): string|null
+    {
+        $type = static::type($url);
+
+        if ($type === 'youtube') {
+            return static::youtubeId($url);
+        }
+
+        if ($type === 'vimeo') {
             return static::vimeoId($url);
         }
 
@@ -32,7 +47,7 @@ class Embed
 
     public static function vimeoId(string $url): string|null
     {
-        $pattern = "/^(http|https)?:\/\/(www\.|player\.)?vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|video\/|)(\d+)(?:|\/\?)$/gmi";
+        $pattern = "/(?:http|https)?:?\/?\/?(?:www\.)?(?:player\.)?vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/(?:[^\/]*)\/videos\/|video\/|)(\d+)(?:|\/\?)/";
 
         if (preg_match($pattern, $url, $matches)) {
             return $matches[1];

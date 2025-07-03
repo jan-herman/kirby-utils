@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.7.0] - 2025-07-03
+### Added
+- `Embed::type()` method
+
+### Fixed
+- `Embed::vimeoId()` method's incorrect regex pattern
+
+
 ## [2.6.0] - 2025-06-09
 ### Added
 - `v()` helper function (adds a `?v=XXX` parameter to the URL for cache busting)
