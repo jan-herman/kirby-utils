@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.8.0] - 2025-12-09
+### Added
+- optional `$prefix` parameter in `Translation->loadDir()` and `Translation->load()` methods (useful for loading plugin translations)
+
+
 ## [2.7.0] - 2025-07-03
 ### Added
 - `Embed::type()` method

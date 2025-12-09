@@ -16,7 +16,7 @@ class Translation
      * @param string $dir The directory containing the translation files.
      * @return array An associative array where keys are language codes and values are translations.
      */
-    public static function loadDir(string $dir): array
+    public static function loadDir(string $dir, string|null $prefix = null): array
     {
         $translations = [];
         $files = Dir::index($dir, true, null, $dir);
@@ -28,7 +28,7 @@ class Translation
 
             $filename = F::name($path);
             $lang = str_contains($filename, '.') ? Str::after($filename, '.') : $filename;
-            $file_translations = Translation::load($path);
+            $file_translations = Translation::load($path, $prefix);
 
             if (isset($translations[$lang])) {
                 $translations[$lang] = array_merge($translations[$lang], $file_translations);
@@ -47,7 +47,7 @@ class Translation
      * @return array The flattened array of translations.
      * @throws Exception If the file cannot be read or the YAML cannot be decoded.
      */
-    public static function load(string $path): array
+    public static function load(string $path, string|null $prefix = null): array
     {
         if (!F::exists($path)) {
             throw new Exception('File not found: $path');
@@ -62,6 +62,10 @@ class Translation
 
         if (!is_array($array)) {
             throw new Exception('Invalid YAML content in file: $path');
+        }
+
+        if ($prefix !== null) {
+            $array = [$prefix => $array];
         }
 
         return self::flatten($array);
