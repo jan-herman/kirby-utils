@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.10.0] - 2025-12-10
+### Added
+- automatic icon detection from page blueprint in `Menu::page()`
+
+
 ## [2.9.0] - 2025-12-10
 ### Added
 - `$link` param in `Menu::page()` now accepts UUIDs

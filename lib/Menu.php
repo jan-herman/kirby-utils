@@ -50,6 +50,8 @@ class Menu
      */
     public static function page(string|array|null $label = null, string|null $icon = null, string|Page|null $link = null, Closure|bool|null $current = null): array
     {
+        $page = null;
+
         if (is_string($link) && str_starts_with($link, 'page://')) {
             $page = page($link);
             $link = $page->panel()->path();
@@ -58,18 +60,21 @@ class Menu
             $link = $page->panel()->path();
         }
 
-        if (is_null($link)) {
+        if ($link === null) {
             return [];
         }
 
+        static::$pages[] = $link;
+
         $data = [
-            'label' => $label ?? ($page?->title()->value() ?? ''),
-            'link' => static::$pages[] = $link,
+            'label'   => $label ?? ($page?->title()->value() ?? ''),
+            'link'    => $link,
             'current' => $current ?? fn () => static::isCurrent($link),
         ];
 
-        if ($icon) {
-            $data['icon'] = $icon;
+        $resolved_icon = $icon ?? $page?->blueprint()->icon();
+        if ($resolved_icon) {
+            $data['icon'] = $resolved_icon;
         }
 
         return $data;
