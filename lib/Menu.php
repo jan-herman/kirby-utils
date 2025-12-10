@@ -48,11 +48,14 @@ class Menu
     /**
      * Returns the panel.menu option for a specific link or page
      */
-    public static function page(string|array $label = null, string $icon = null, string|Page $link = null, Closure|bool $current = null): array
+    public static function page(string|array|null $label = null, string|null $icon = null, string|Page|null $link = null, Closure|bool|null $current = null): array
     {
-        if ($link instanceof Page) {
+        if (is_string($link) && str_starts_with($link, 'page://')) {
+            $page = page($link);
+            $link = $page->panel()->path();
+        } elseif ($link instanceof Page) {
             $page = $link;
-            $link = $link->panel()->path();
+            $link = $page->panel()->path();
         }
 
         if (is_null($link)) {
@@ -60,7 +63,7 @@ class Menu
         }
 
         $data = [
-            'label' => $label ?? ($page->title()->value() ?? ''),
+            'label' => $label ?? ($page?->title()->value() ?? ''),
             'link' => static::$pages[] = $link,
             'current' => $current ?? fn () => static::isCurrent($link),
         ];
@@ -75,7 +78,7 @@ class Menu
     /**
      * Returns the panel.menu option for a dialog
      */
-    public static function dialog(string|array $label = null, string $icon = null, string $dialog = null): array
+    public static function dialog(string|array|null $label = null, string|null $icon = null, string|null $dialog = null): array
     {
         if (is_null($dialog)) {
             return [];
@@ -96,10 +99,10 @@ class Menu
     /**
      * Returns the site panel.menu option, ignores all custom pages
      */
-    public static function site(string $label = null, string $icon = null): array
+    public static function site(string|null $label = null, string|null $icon = null): array
     {
         $data = [
-            'current' => fn (string $id = null) => $id === 'site' && static::isCurrent(null, static::$pages),
+            'current' => fn (string|null $id = null) => $id === 'site' && static::isCurrent(null, static::$pages),
         ];
 
         if ($label) {

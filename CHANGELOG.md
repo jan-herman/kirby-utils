@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.9.0] - 2025-12-10
+### Added
+- `$link` param in `Menu::page()` now accepts UUIDs
+
+
 ## [2.8.0] - 2025-12-09
 ### Added
 - optional `$prefix` parameter in `Translation->loadDir()` and `Translation->load()` methods (useful for loading plugin translations)
