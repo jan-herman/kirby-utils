@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.11.0] - 2026-03-23
+### Added
+- `youtubeUrl` & `vimeoUrl` validators
+
+
 ## [2.10.0] - 2025-12-10
 ### Added
 - automatic icon detection from page blueprint in `Menu::page()`
