@@ -58,6 +58,8 @@ class Menu
         } elseif ($link instanceof Page) {
             $page = $link;
             $link = $page->panel()->path();
+        } elseif (is_string($link) && str_starts_with($link, 'pages/')) {
+            $page = page(substr($link, 6));
         }
 
         if ($link === null) {
@@ -106,8 +108,15 @@ class Menu
      */
     public static function site(string|null $label = null, string|null $icon = null): array
     {
+        $ignored_pages = array_filter([
+            page('page://settings')?->panel()->path(),
+            page('page://media-library')?->panel()->path(),
+            page('page://block-library')?->panel()->path(),
+            page('page://taxonomies')?->panel()->path(),
+        ]);
+
         $data = [
-            'current' => fn (string|null $id = null) => $id === 'site' && static::isCurrent(null, static::$pages),
+            'current' => fn (string|null $id = null) => $id === 'site' && static::isCurrent(null, array_merge($ignored_pages, static::$pages)),
         ];
 
         if ($label) {

@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.12.0] - 2026-04-04
+### Added
+- `JanHerman\Utils\Menu`: automatic label and icon detection for links like 'pages/page-name'
+- `JanHerman\Utils\Menu`: support for custom areas like 'settings', 'taxonomies', 'media-library' and 'block-library'
+
+
 ## [2.11.0] - 2026-03-23
 ### Added
 - `youtubeUrl` & `vimeoUrl` validators
