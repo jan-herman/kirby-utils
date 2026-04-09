@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.13.0] - 2026-04-09
+### Added
+- `JanHerman\Utils\QueryParams` class
+- `$collection->inflate()` helper method (inspired by https://github.com/MENSCHMASCHINE-Studio/kirby-inflate)
+
+
 ## [2.12.0] - 2026-04-04
 ### Added
 - `JanHerman\Utils\Menu`: automatic label and icon detection for links like 'pages/page-name'

@@ -41,6 +41,45 @@ Kirby::plugin('jan-herman/utils', [
         },
     ],
     /**
+     * Collection Methods
+     */
+    'collectionMethods' => [
+        'inflate' => function (int $size = 50, bool $shuffle = false): self {
+            // Only run in dev environment
+            if (!kirby()->environment()->isLocal()) {
+                trigger_error('\'$collection->inflate()\' method is not allowed in production environment.', E_USER_NOTICE);
+                return $this;
+            }
+
+            $count = $this->count();
+
+            // Invalid size or already large enough
+            if ($size <= 0 || $count >= $size) {
+                return $this;
+            }
+
+            $collection = $this;
+            $needed = $size - $count;
+
+            for ($i = 0; $i < $needed; $i++) {
+                $item = $this->nth($i % $count);
+
+                if (!$item) {
+                    break;
+                }
+
+                $key = $item->id() . '-' . bin2hex(random_bytes(5));
+                $collection = $collection->append($key, $item);
+            }
+
+            if ($shuffle === true) {
+                $collection = $collection->shuffle();
+            }
+
+            return $collection;
+        }
+    ],
+    /**
      * Automatically load translations from `site/translations` folder
      */
     'translations' => Translation::loadDir(kirby()->root('languages') . '/translations'),
