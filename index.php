@@ -54,7 +54,7 @@ Kirby::plugin('jan-herman/utils', [
             $count = $this->count();
 
             // Invalid size or already large enough
-            if ($size <= 0 || $count >= $size) {
+            if ($this->isEmpty() || $size <= 0 || $count >= $size) {
                 return $this;
             }
 
