@@ -2,6 +2,8 @@
 
 namespace JanHerman\Utils;
 
+use Kirby\Toolkit\A;
+
 class QueryParams
 {
     private array $params;
@@ -183,8 +185,10 @@ class QueryParams
     /**
      * Return a new instance containing only the given keys.
      */
-    public function only(array $keys): self
+    public function only(array|string $keys): self
     {
+        $keys = A::wrap($keys);
+
         $clone = clone $this;
         $allowed_keys = array_fill_keys($keys, true);
         $clone->params = array_intersect_key($clone->params, $allowed_keys);
@@ -194,8 +198,10 @@ class QueryParams
     /**
      * Return a new instance without the given keys.
      */
-    public function except(array $keys): self
+    public function except(array|string $keys): self
     {
+        $keys = A::wrap($keys);
+
         $clone = clone $this;
         foreach ($keys as $key) {
             $clone->remove($key);
