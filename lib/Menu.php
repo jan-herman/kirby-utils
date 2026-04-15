@@ -66,10 +66,17 @@ class Menu
             return [];
         }
 
+        if ($label === null) {
+            $user_language = kirby()->user()?->language();
+            $page_title = $page?->content($user_language)->get('title')->toString() ?: $page?->title()->toString();
+
+            $label = $page_title ?? '';
+        }
+
         static::$pages[] = $link;
 
         $data = [
-            'label'   => $label ?? ($page?->title()->value() ?? ''),
+            'label'   => $label,
             'link'    => $link,
             'current' => $current ?? fn () => static::isCurrent($link),
         ];
