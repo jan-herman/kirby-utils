@@ -30,6 +30,14 @@ class QueryParams
     }
 
     /**
+     * Clone the params object.
+     */
+    public function clone(): self
+    {
+        return clone $this;
+    }
+
+    /**
      * Add a single value for a key if it's not already present.
      */
     public function add(string $key, string $value): void
@@ -141,7 +149,7 @@ class QueryParams
      */
     public function with(string $key, string $value): self
     {
-        $clone = clone $this;
+        $clone = $this->clone();
         $clone->add($key, $value);
         return $clone;
     }
@@ -151,7 +159,7 @@ class QueryParams
      */
     public function without(string $key, string|null $value = null): self
     {
-        $clone = clone $this;
+        $clone = $this->clone();
         $clone->remove($key, $value);
         return $clone;
     }
@@ -161,7 +169,7 @@ class QueryParams
      */
     public function one(string $key, string $value): self
     {
-        $clone = clone $this;
+        $clone = $this->clone();
         $clone->params[$key] = [$value];
         return $clone;
     }
@@ -171,7 +179,7 @@ class QueryParams
      */
     public function toggle(string $key, string $value): self
     {
-        $clone = clone $this;
+        $clone = $this->clone();
 
         if ($this->has($key, $value)) {
             $clone->remove($key, $value);
@@ -189,7 +197,7 @@ class QueryParams
     {
         $keys = A::wrap($keys);
 
-        $clone = clone $this;
+        $clone = $this->clone();
         $allowed_keys = array_fill_keys($keys, true);
         $clone->params = array_intersect_key($clone->params, $allowed_keys);
         return $clone;
@@ -202,7 +210,7 @@ class QueryParams
     {
         $keys = A::wrap($keys);
 
-        $clone = clone $this;
+        $clone = $this->clone();
         foreach ($keys as $key) {
             $clone->remove($key);
         }
