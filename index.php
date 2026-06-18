@@ -13,7 +13,16 @@ Kirby::plugin('jan-herman/utils', [
      * Field Methods
      */
     'fieldMethods' => [
-        'unhtml' => function ($field) {
+        'stripHtml' => function (Field $field): Field {
+            $field->value = Str::unhtml($field->toString());
+
+            return $field;
+        },
+        /**
+         * @deprecated Use `$field->stripHtml()->toString()` or chain
+         *             `$field->stripHtml()` with other field methods instead.
+         */
+        'unhtml' => function (Field $field): string {
             return Str::unhtml($field->toString());
         }
     ],

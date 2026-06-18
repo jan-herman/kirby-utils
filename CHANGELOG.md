@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.14.0] - 2026-06-18
+### Added
+- `$field->stripHtml()` method
+
+### Deprecated
+- `$field->unhtml()` method
+
+
 ## [2.13.0] - 2026-04-09
 ### Added
 - `JanHerman\Utils\QueryParams` class
