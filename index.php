@@ -1,6 +1,7 @@
 <?php
 
 use Kirby\Cms\App as Kirby;
+use Kirby\Content\Field;
 use Kirby\Exception\Exception;
 use Kirby\Toolkit\Str;
 use JanHerman\Utils\Embed;
